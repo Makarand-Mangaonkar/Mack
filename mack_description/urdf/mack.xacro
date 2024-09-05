@@ -1,0 +1,385 @@
+<?xml version="1.0" ?>
+<robot name="mack" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find mack_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find mack_description)/urdf/mack.trans" />
+<xacro:include filename="$(find mack_description)/urdf/mack.gazebo" />
+<xacro:include filename="$(find mack_description)/urdf/diff_drive.gazebo" />
+<!--<xacro:include filename="$(find mack_description)/urdf/lidar.gazebo" />-->
+
+
+<link name="base_link">
+  <inertial>
+    <origin xyz="0.16499999922215533 0.12000000000013682 0.13289602911287893" rpy="0 0 0"/>
+    <mass value="38.16759962080249"/>
+    <inertia ixx="0.548564" iyy="1.148902" izz="1.542967" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mack_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mack_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_wheel_1">
+  <inertial>
+    <origin xyz="0.0 -0.02999999999999993 0.0" rpy="0 0 0"/>
+    <mass value="2.8771962158636755"/>
+    <inertia ixx="0.011221" iyy="0.020716" izz="0.011221" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.165 0.08 -0.14046" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mack_description)/meshes/left_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.165 0.08 -0.14046" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mack_description)/meshes/left_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_wheel_1">
+  <inertial>
+    <origin xyz="-1.1102230246251565e-16 0.030000000000000193 5.551115123125783e-17" rpy="0 0 0"/>
+    <mass value="2.8771962158636755"/>
+    <inertia ixx="0.011221" iyy="0.020716" izz="0.011221" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.165 -0.32 -0.14046" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mack_description)/meshes/right_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.165 -0.32 -0.14046" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mack_description)/meshes/right_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_tyre_grip_1">
+  <inertial>
+    <origin xyz="-2.498001805406602e-16 0.03000000000000025 2.220446049250313e-16" rpy="0 0 0"/>
+    <mass value="0.4382521751757751"/>
+    <inertia ixx="0.003561" iyy="0.006859" izz="0.003561" ixy="-0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.165 0.14 -0.14046" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mack_description)/meshes/left_tyre_grip_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.165 0.14 -0.14046" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mack_description)/meshes/left_tyre_grip_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_tyre_grip_1">
+  <inertial>
+    <origin xyz="-2.220446049250313e-16 -0.029999999999999805 -2.7755575615628914e-17" rpy="0 0 0"/>
+    <mass value="0.4382521751757761"/>
+    <inertia ixx="0.003561" iyy="0.006859" izz="0.003561" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.165 -0.38 -0.14046" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mack_description)/meshes/right_tyre_grip_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.165 -0.38 -0.14046" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mack_description)/meshes/right_tyre_grip_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="front_caster_1">
+  <inertial>
+    <origin xyz="0.19999999999999998 -8.326672684688674e-17 -0.014799550239393673" rpy="0 0 0"/>
+    <mass value="1.1778428198848274"/>
+    <inertia ixx="0.000485" iyy="0.000485" izz="0.000751" ixy="-0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.165 -0.12 -0.05046" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mack_description)/meshes/front_caster_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.165 -0.12 -0.05046" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mack_description)/meshes/front_caster_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="back_caster_1">
+  <inertial>
+    <origin xyz="-0.20000000000000015 -2.7755575615628914e-17 -0.01479955023939366" rpy="0 0 0"/>
+    <mass value="1.1778428198848274"/>
+    <inertia ixx="0.000485" iyy="0.000485" izz="0.000751" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.165 -0.12 -0.05046" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mack_description)/meshes/back_caster_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.165 -0.12 -0.05046" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mack_description)/meshes/back_caster_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="dept_camera_1">
+  <inertial>
+    <origin xyz="0.003999999999999837 5.551115123125783e-17 5.551115123125783e-17" rpy="0 0 0"/>
+    <mass value="0.010754465589573915"/>
+    <inertia ixx="4e-06" iyy="0.0" izz="3e-06" ixy="-0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.465 -0.12 -0.14046" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mack_description)/meshes/dept_camera_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.465 -0.12 -0.14046" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mack_description)/meshes/dept_camera_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="imu_link_1">
+  <inertial>
+    <origin xyz="0.1749999999999993 -3.885780586188048e-16 0.003999999999999754" rpy="0 0 0"/>
+    <mass value="0.022929718095535036"/>
+    <inertia ixx="8e-06" iyy="3e-06" izz="1.1e-05" ixy="-0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.165 -0.12 -0.21046" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mack_description)/meshes/imu_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.165 -0.12 -0.21046" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mack_description)/meshes/imu_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="lidar_base_1">
+  <inertial>
+    <origin xyz="-8.326672684688674e-17 -2.7755575615628914e-17 0.032" rpy="0 0 0"/>
+    <mass value="0.3410010329912504"/>
+    <inertia ixx="0.000253" iyy="0.000253" izz="0.000273" ixy="0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.165 -0.12 -0.21046" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mack_description)/meshes/lidar_base_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.165 -0.12 -0.21046" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mack_description)/meshes/lidar_base_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="lidar_link_1">
+  <inertial>
+    <origin xyz="-8.326672684688674e-17 -5.551115123125783e-17 0.020000000000000018" rpy="0 0 0"/>
+    <mass value="0.13646983083106357"/>
+    <inertia ixx="5.3e-05" iyy="5.3e-05" izz="7e-05" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.165 -0.12 -0.27446" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mack_description)/meshes/lidar_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.165 -0.12 -0.27446" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mack_description)/meshes/lidar_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="gps_link_1">
+  <inertial>
+    <origin xyz="-0.17499999999999916 -6.938893903907228e-17 0.010000000000000064" rpy="0 0 0"/>
+    <mass value="0.17487250078400407"/>
+    <inertia ixx="0.000121" iyy="0.000121" izz="0.000231" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.165 -0.12 -0.21046" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mack_description)/meshes/gps_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.165 -0.12 -0.21046" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mack_description)/meshes/gps_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="camera_base_1">
+  <inertial>
+    <origin xyz="4.440892098500626e-16 -9.71445146547012e-17 0.010000000000000009" rpy="0 0 0"/>
+    <mass value="0.0025119999999999596"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="-0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.445 -0.12 -0.21046" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mack_description)/meshes/camera_base_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.445 -0.12 -0.21046" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mack_description)/meshes/camera_base_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="camera_link_1">
+  <inertial>
+    <origin xyz="3.3306690738754696e-16 -8.326672684688674e-17 0.008000000000000174" rpy="0 0 0"/>
+    <mass value="0.0016281600485229474"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.445 -0.12 -0.23046" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mack_description)/meshes/camera_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.445 -0.12 -0.23046" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mack_description)/meshes/camera_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="Revolute 14" type="continuous">
+  <origin xyz="0.165 -0.08 0.14046" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="left_wheel_1"/>
+  <axis xyz="0.0 -1.0 0.0"/>
+</joint>
+
+<joint name="Revolute 15" type="continuous">
+  <origin xyz="0.165 0.32 0.14046" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="right_wheel_1"/>
+  <axis xyz="0.0 -1.0 0.0"/>
+</joint>
+
+<joint name="Rigid 16" type="fixed">
+  <origin xyz="0.0 -0.06 0.0" rpy="0 0 0"/>
+  <parent link="left_wheel_1"/>
+  <child link="left_tyre_grip_1"/>
+</joint>
+
+<joint name="Rigid 17" type="fixed">
+  <origin xyz="0.0 0.06 0.0" rpy="0 0 0"/>
+  <parent link="right_wheel_1"/>
+  <child link="right_tyre_grip_1"/>
+</joint>
+
+<joint name="Rigid 18" type="fixed">
+  <origin xyz="0.165 0.12 0.05046" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="front_caster_1"/>
+</joint>
+
+<joint name="Rigid 19" type="fixed">
+  <origin xyz="0.165 0.12 0.05046" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="back_caster_1"/>
+</joint>
+
+<joint name="Rigid 20" type="fixed">
+  <origin xyz="0.465 0.12 0.14046" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="dept_camera_1"/>
+</joint>
+
+<joint name="Rigid 21" type="fixed">
+  <origin xyz="0.165 0.12 0.21046" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="imu_link_1"/>
+</joint>
+
+<joint name="Rigid 23" type="fixed">
+  <origin xyz="0.165 0.12 0.21046" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="lidar_base_1"/>
+</joint>
+
+<joint name="Rigid 24" type="fixed">
+  <origin xyz="0.0 0.0 0.064" rpy="0 0 0"/>
+  <parent link="lidar_base_1"/>
+  <child link="lidar_link_1"/>
+</joint>
+
+<joint name="Rigid 25" type="fixed">
+  <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+  <parent link="lidar_base_1"/>
+  <child link="gps_link_1"/>
+</joint>
+
+<joint name="Rigid 26" type="fixed">
+  <origin xyz="0.445 0.12 0.21046" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="camera_base_1"/>
+</joint>
+
+<joint name="Rigid 27" type="fixed">
+  <origin xyz="0.0 0.0 0.02" rpy="0 0 0"/>
+  <parent link="camera_base_1"/>
+  <child link="camera_link_1"/>
+</joint>
+
+</robot>
