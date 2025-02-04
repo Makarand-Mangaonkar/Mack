@@ -1,0 +1,26 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/makarand/ROS_IN/install/theora_image_transport/local/lib/python3.10/dist-packages",
+        "/home/makarand/ROS_IN/install/opencv_tests/lib/python3.10/site-packages",
+        "/home/makarand/ROS_IN/install/mackkk_description/lib/python3.10/site-packages",
+        "/home/makarand/ROS_IN/install/camera_calibration/lib/python3.10/site-packages",
+        "/home/makarand/ROS_IN/install/image_geometry/local/lib/python3.10/dist-packages",
+        "/home/makarand/ROS_IN/install/cv_bridge/local/lib/python3.10/dist-packages",
+        "/home/makarand/ROS_IN/install/apriltag_msgs/local/lib/python3.10/dist-packages",
+        "/opt/ros/humble/lib/python/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/makarand/ROS_IN/install/theora_image_transport/local/lib/python3.10/dist-packages",
+        "/home/makarand/ROS_IN/install/opencv_tests/lib/python3.10/site-packages",
+        "/home/makarand/ROS_IN/install/mackkk_description/lib/python3.10/site-packages",
+        "/home/makarand/ROS_IN/install/camera_calibration/lib/python3.10/site-packages",
+        "/home/makarand/ROS_IN/install/image_geometry/local/lib/python3.10/dist-packages",
+        "/home/makarand/ROS_IN/install/cv_bridge/local/lib/python3.10/dist-packages",
+        "/home/makarand/ROS_IN/install/apriltag_msgs/local/lib/python3.10/dist-packages",
+        "/opt/ros/humble/lib/python/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ]
+}

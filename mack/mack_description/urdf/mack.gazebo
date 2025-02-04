@@ -1,0 +1,132 @@
+<?xml version="1.0" ?>
+<robot name="mack" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+<xacro:property name="body_color" value="Gazebo/Green" />
+<xacro:property name="wheel_color" value="Gazebo/DarkGrey" />
+<xacro:property name="lidar_color" value="Gazebo/Red" />
+<xacro:property name="camera1_color" value="Gazebo/Blue" />
+<xacro:property name="camera2_color" value="Gazebo/Black" />
+
+
+<gazebo>
+  <plugin name="control" filename="libgazebo_ros_control.so"/>
+</gazebo>
+
+  <gazebo>
+    <plugin name="diff_drive_control" filename="libgazebo_ros_diff_drive.so">
+
+      <!-- Update rate in Hz -->
+      <update_rate>10</update_rate>
+
+      <!-- wheels -->
+      <left_joint>Revolute 9</left_joint>
+      <right_joint>Revolute 7</right_joint>
+
+      <!-- kinematics -->
+      <wheel_separation>1.05</wheel_separation>
+      <wheel_diameter>0.5</wheel_diameter>
+
+      <!-- input -->
+      <command_topic>cmd_vel</command_topic>
+
+      <!-- output -->
+      <publish_odom>true</publish_odom>
+      <publish_odom_tf>true</publish_odom_tf>
+      <publish_wheel_tf>true</publish_wheel_tf>
+
+      <odometry_topic>odom</odometry_topic>
+      <odometry_frame>odom</odometry_frame>
+      <robot_base_frame>base_footprint</robot_base_frame>
+
+    </plugin>
+  </gazebo>
+
+  <gazebo reference="lidar_link_1">
+    <sensor type="ray" name="head_hokuyo_sensor">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>false</visualize>
+      <update_rate>20</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>300</samples>
+            <resolution>1</resolution>
+            <min_angle>-3.14</min_angle>
+            <max_angle>3.14</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.10</min>
+          <max>30.0</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <!-- Noise parameters based on published spec for Hokuyo laser
+               achieving "+-30mm" accuracy at range < 10m.  A mean of 0.0m and
+               stddev of 0.01m will put 99.7% of samples within 0.03m of the true
+               reading. -->
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <plugin name="my_ray_sensor_plugin" filename="libgazebo_ros_ray_sensor.so">
+        <ros>
+          <!-- Configure namespace and remap to publish to /ray/pointcloud2 -->
+          <remapping>~/out:=scan</remapping>
+        </ros>
+        <!-- Output as a PointCloud2, see above for other types -->
+        <output_type>sensor_msgs/LaserScan</output_type>
+        <!-- Clip intensity values so all are above 100, optional -->
+        <min_intensity>100.0</min_intensity>
+        <!-- Frame id for header of output, defaults to sensor's parent link name -->
+        <frame_name>lidar_link_1</frame_name>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+
+<gazebo reference="base_link">
+  <material>${body_color}</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+  <gravity>true</gravity>
+</gazebo>
+
+<gazebo reference="lidar_link_1">
+  <material>${lidar_color}</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="camera1_link_1">
+  <material>${camera1_color}</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="camera2_link_1">
+  <material>${camera2_color}</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="right_wheel_1">
+  <material>${wheel_color}</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="left_wheel_1">
+  <material>${wheel_color}</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+</robot>
